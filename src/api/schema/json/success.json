@@ -1,0 +1,16 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "API success",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "enum": ["api:success"],
+            "type": "string"
+        },
+        "message": {
+            "type": "string"
+        }
+    },
+    "additionalProperties": false,
+    "required": ["$schema", "message"]
+}

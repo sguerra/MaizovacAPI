@@ -8,13 +8,23 @@ mediaType: application/json
 types:
     api:version: !include ../schema/json/version.json
     api:error: !include ../schema/json/error.json
+    api:success: !include ../schema/json/success.json
+    api:service: !include ../schema/json/service.json
+    api:user: !include ../schema/json/user.json
+    api:role: !include ../schema/json/role.json
+    api:record: !include ../schema/json/record.json
+    api:balance: !include ../schema/json/balance.json
+    api:profile: !include ../schema/json/profile.json
+    api:session: !include ../schema/json/session.json
 
 /{version}:
+    description: API version
     uriParameters:
         version:
             enum: ["v1"]
             type: "string"
     get:
+        description: Get current API version information
         responses:
             200:
                 body:
@@ -22,3 +32,114 @@ types:
             404:
                 body:
                     type: api:error
+    /services:
+        get:
+            description: Get API services
+            responses:
+                200:
+                    body:
+                        type: api:service
+                404:
+                    body:
+                        type: api:error
+        /{service}:
+            uriParameters:
+                service:
+                    type: "string"
+            get:
+                description: Get an API service detail
+                responses:
+                    200:
+                        body:
+                            type: api:service
+                    404:
+                        body:
+                            type: api:error
+            /calculate:
+                post:
+                    description: Call calculate method of a service
+                    responses:
+                        201:
+                            body:
+                                type: api:success
+                        404:
+                            body:
+                                type: api:error
+    /users:
+        get:
+            description: Get a collection of users
+            responses:
+                200:
+                    body:
+                        type: api:user
+                404:
+                    body:
+                        type: api:error
+    /roles:
+        get:
+            description: Get all roles
+            responses:
+                200:
+                    body:
+                        type: api:role
+                404:
+                    body:
+                        type: api:error
+    /records:
+        get:
+            description: Get a collection of records
+            responses:
+                200:
+                    body:
+                        type: api:record
+                404:
+                    body:
+                        type: api:error
+    /balance:
+        get:
+            description: Get a collection of user balances
+            responses:
+                200:
+                    body:
+                        type: api:balance
+                404:
+                    body:
+                        type: api:error
+    /profile:
+        get:
+            description: Get current user profile
+            responses:
+                200:
+                    body:
+                        type: api:profile
+                404:
+                    body:
+                        type: api:error
+    /session:
+        get:
+            description: Get the current user session
+            responses:
+                200:
+                    body:
+                        type: api:session
+                404:
+                    body:
+                        type: api:error
+        post:
+            description: Sign in a user
+            responses:
+                201:
+                    body:
+                        type: api:success
+                404:
+                    body:
+                        type: api:error
+        delete:
+            description: Sign out a user
+            responses:
+                200:
+                    body:
+                        type: api:success
+                404:
+                    body:
+                        type: api:error

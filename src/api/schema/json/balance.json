@@ -1,0 +1,16 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "API balance",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "enum": ["api:balance"],
+            "type": "string"
+        },
+        "uuid": {
+            "type": "string"
+        }
+    },
+    "additionalProperties": false,
+    "required": ["$schema", "uuid"]
+}
