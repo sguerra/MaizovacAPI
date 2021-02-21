@@ -6,13 +6,15 @@ import * as routes from './routes';
 import { APIError } from './api/schema/types/error';
 
 const app = express();
-app.use(bodyParser.json());
-
 const PORT = process.env.PORT || 3000;
-const path = join(__dirname, 'api/raml', 'api.raml');
+const ramlPath = join(__dirname, 'api/raml/api.raml');
+const staticDocsPath = join(__dirname, 'docs');
+
+app.use(bodyParser.json());
+app.use(express.static(staticDocsPath));
 
 osprey
-    .loadFile(path)
+    .loadFile(ramlPath)
     .then((middleware) => {
         app.use(middleware);
 

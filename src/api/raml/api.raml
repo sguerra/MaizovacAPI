@@ -7,14 +7,18 @@ mediaType: application/json
 
 types:
     api:version: !include ../schema/json/version.json
-    
+    api:error: !include ../schema/json/error.json
+
 /{version}:
     uriParameters:
         version:
-            type: 
-                enum: ["v1"]
+            enum: ["v1"]
+            type: "string"
     get:
         responses:
             200:
                 body:
                     type: api:version
+            404:
+                body:
+                    type: api:error
