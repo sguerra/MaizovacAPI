@@ -1,0 +1,16 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "API error",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "enum": ["api:error"],
+            "type": "string"
+        },
+        "message": {
+            "type": "string"
+        }
+    },
+    "additionalProperties": false,
+    "required": ["$schema", "message"]
+}

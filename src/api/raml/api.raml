@@ -1,0 +1,20 @@
+#%RAML 1.0
+title: "Maizovac API"
+version: v1
+protocols: [ HTTP, HTTPS ]
+baseUri: http://localhost:3000
+mediaType: application/json
+
+types:
+    api:version: !include ../schema/json/version.json
+    
+/{version}:
+    uriParameters:
+        version:
+            type: 
+                enum: ["v1"]
+    get:
+        responses:
+            200:
+                body:
+                    type: api:version
