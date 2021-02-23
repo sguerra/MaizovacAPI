@@ -4,14 +4,20 @@ import { join } from 'path';
 import bodyParser from 'body-parser';
 import * as routes from './routes';
 import { APIError } from './api/schema/types/error';
+import { DatabaseService } from './services';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const DB_CONNECTION_STRING = process.env.DB_CONNECTION_STRING || '';
 const ramlPath = join(__dirname, 'api/raml/api.raml');
 const staticDocsPath = join(__dirname, 'docs');
 
 app.use(bodyParser.json());
 app.use(express.static(staticDocsPath));
+
+const databaseService = DatabaseService.getInstance(DB_CONNECTION_STRING);
+databaseService.init();
+databaseService.sync();
 
 osprey
     .loadFile(ramlPath)

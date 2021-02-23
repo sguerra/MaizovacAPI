@@ -6,8 +6,8 @@
  */
 
 export interface APIUser {
-    $schema: 'api:user';
-    uuid: string;
+    $schema?: 'api:user';
+    uuid?: string;
     username: string;
     role?: 'user' | 'admin';
     status?: 'active' | 'trial' | 'inactive';

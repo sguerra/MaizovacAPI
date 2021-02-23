@@ -1,5 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "api:user",
     "title": "API user",
     "type": "object",
     "properties": {
@@ -16,13 +17,15 @@
         },
         "role": {
             "type": "string",
-            "enum": ["user", "admin"]
+            "enum": ["user", "admin"],
+            "default": "user"
         },
         "status": {
             "type": "string",
-            "enum": ["active", "trial", "inactive"]
+            "enum": ["active", "trial", "inactive"],
+            "default": "trial"
         }
     },
     "additionalProperties": false,
-    "required": ["$schema", "uuid", "username"]
+    "required": ["username"]
 }
