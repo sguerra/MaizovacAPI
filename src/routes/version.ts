@@ -1,4 +1,4 @@
-import { IRoute, response } from 'express';
+import { IRoute } from 'express';
 import { APIVersion } from '../api/schema/types/version';
 import { APIError } from '../api/schema/types/error';
 

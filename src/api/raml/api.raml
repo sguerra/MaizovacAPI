@@ -9,6 +9,7 @@ types:
     api:version: !include ../schema/json/version.json
     api:error: !include ../schema/json/error.json
     api:success: !include ../schema/json/success.json
+    api:collection: !include ../schema/json/collection.json
     api:service: !include ../schema/json/service.json
     api:user: !include ../schema/json/user.json
     api:role: !include ../schema/json/role.json
@@ -16,6 +17,7 @@ types:
     api:balance: !include ../schema/json/balance.json
     api:profile: !include ../schema/json/profile.json
     api:session: !include ../schema/json/session.json
+    
 
 /{version}:
     description: API version
@@ -38,7 +40,7 @@ types:
             responses:
                 200:
                     body:
-                        type: api:service
+                        type: api:collection
                 404:
                     body:
                         type: api:error
@@ -71,17 +73,61 @@ types:
             responses:
                 200:
                     body:
+                        type: api:collection
+                404:
+                    body:
+                        type: api:error
+        post:
+            description: Create a new user
+            body:
+                type: api:user
+            responses:
+                201:
+                    body:
                         type: api:user
                 404:
                     body:
                         type: api:error
+        /{username}:
+            uriParameters:
+                username:
+                    type: "string"
+            get:
+                description: Get a user detail
+                responses:
+                    200:
+                        body:
+                            type: api:user
+                    404:
+                        body:
+                            type: api:error
+            patch:
+                description: Update a user
+                body:
+                    type: api:user
+                responses:
+                    200:
+                        body:
+                            type: api:user
+                    404:
+                        body:
+                            type: api:error
+            delete:
+                description: Soft-delete a user
+                responses:
+                    201:
+                        body:
+                            type: api:success
+                    404:
+                        body:
+                            type: api:error
     /roles:
         get:
             description: Get all roles
             responses:
                 200:
                     body:
-                        type: api:role
+                        type: api:collection
                 404:
                     body:
                         type: api:error
@@ -91,7 +137,7 @@ types:
             responses:
                 200:
                     body:
-                        type: api:record
+                        type: api:collection
                 404:
                     body:
                         type: api:error
@@ -101,7 +147,7 @@ types:
             responses:
                 200:
                     body:
-                        type: api:balance
+                        type: api:collection
                 404:
                     body:
                         type: api:error

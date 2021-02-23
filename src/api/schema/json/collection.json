@@ -1,0 +1,27 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "api:collection",
+    "title": "API collection",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "enum": ["api:collection"],
+            "type": "string"
+        },
+        "items": {
+            "type": "array",
+            "minItems": 0,
+            "items": {
+                "anyOf": [
+                    { "$ref": "src/api/schema/json/service.json" },
+                    { "$ref": "src/api/schema/json/user.json" },
+                    { "$ref": "src/api/schema/json/role.json" },
+                    { "$ref": "src/api/schema/json/record.json" },
+                    { "$ref": "src/api/schema/json/balance.json" }
+                ]
+            }
+        }
+    },
+    "additionalProperties": false,
+    "required": ["$schema", "items"]
+}
