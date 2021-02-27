@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import osprey from 'osprey';
 import { join } from 'path';
 import bodyParser from 'body-parser';
@@ -12,6 +13,7 @@ const DB_CONNECTION_STRING = process.env.DB_CONNECTION_STRING || '';
 const ramlPath = join(__dirname, 'api/raml/api.raml');
 const staticDocsPath = join(__dirname, 'docs');
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(staticDocsPath));
 

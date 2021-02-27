@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/sguerra/MaizovacAPI#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-json-validator-middleware": "^2.1.1",
     "json-schema-to-typescript": "^10.1.3",
@@ -40,6 +41,7 @@
     "@types/validator": "^13.1.3",
     "install": "^0.13.0",
     "prettier": "^2.2.1",
+    "sequelize-cli": "^6.2.0",
     "typescript": "^4.1.5"
   }
 }
