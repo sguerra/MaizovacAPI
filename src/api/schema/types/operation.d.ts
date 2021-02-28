@@ -10,12 +10,12 @@ export interface APIOperation {
     parameters: SingleOperation | BinaryOperation | RandomStringOperation;
 }
 export interface SingleOperation {
-    operand?: number;
+    operand: number;
     [k: string]: unknown;
 }
 export interface BinaryOperation {
-    firstOperand?: number;
-    secondOperand?: number;
+    firstOperand: number;
+    secondOperand: number;
     [k: string]: unknown;
 }
 export interface RandomStringOperation {

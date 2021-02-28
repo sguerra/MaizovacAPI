@@ -32,7 +32,7 @@ osprey
                 message: err.message
             };
 
-            res.status(err.statusCode).send(errorMessage);
+            res.status(err.statusCode).json(errorMessage);
         });
 
         routes.register(app);

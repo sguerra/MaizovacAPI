@@ -9,7 +9,8 @@
                 "operand": {
                     "type": "number"
                 }
-            }
+            },
+            "required": ["operand"]
         },
         "binaryOperation": {
             "type": "object",
@@ -20,7 +21,8 @@
                 "secondOperand": {
                     "type": "number"
                 }
-            }
+            },
+            "required": ["firstOperand", "secondOperand"]
         },
         "randomStringOperation": {
             "type": "object",

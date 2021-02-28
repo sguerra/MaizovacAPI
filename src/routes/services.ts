@@ -1,4 +1,5 @@
 import { IRoute } from 'express';
+import { errorHandler } from '../utils';
 import { APISuccess } from '../api/schema/types/success';
 import { APICollection } from '../api/schema/types/collection';
 import { APIOperationResult } from '../api/schema/types/operationResult';
@@ -12,157 +13,214 @@ const successMessage: APISuccess = {
 
 export const register = (route: IRoute) => {
     route.get(async (req, res) => {
-        const serviceCollection = (await Service.findAll()) as any;
+        try {
+            const serviceCollection = (await Service.findAll()) as any;
 
-        const responseBody: APICollection = {
-            $schema: 'api:collection',
-            items: serviceCollection
-        };
+            const responseBody: APICollection = {
+                $schema: 'api:collection',
+                items: serviceCollection
+            };
 
-        res.send(responseBody);
+            res.send(responseBody);
+        } catch (err) {
+            errorHandler(err, res);
+        }
     });
 
     route.post(async (req, res) => {
-        let service = req.body as Service;
+        try {
+            let service = req.body as Service;
 
-        service = await Service.create(service);
-        res.status(201).send(service);
+            service = await Service.create(service);
+            res.status(201).send(service);
+        } catch (err) {
+            errorHandler(err, res);
+        }
     });
 };
 
 export const registerDetail = (route: IRoute) => {
     route.get(async (req, res) => {
-        const serviceType = req.params['service'];
+        try {
+            const serviceType = req.params['service'];
 
-        const service = await Service.findOne({
-            where: {
-                type: serviceType
-            }
-        });
+            const service = await Service.findOne({
+                where: {
+                    type: serviceType
+                }
+            });
 
-        res.send(service);
+            res.send(service);
+        } catch (err) {
+            errorHandler(err, res);
+        }
     });
 
     route.patch(async (req, res) => {
-        const serviceType = req.params['service'];
+        try {
+            const serviceType = req.params['service'];
 
-        const service = await Service.update(req.body, {
-            where: {
-                type: serviceType
-            }
-        });
-        res.status(200).send(service);
+            const service = await Service.update(req.body, {
+                where: {
+                    type: serviceType
+                }
+            });
+            res.status(200).send(service);
+        } catch (err) {
+            errorHandler(err, res);
+        }
     });
 
     route.delete(async (req, res) => {
-        const serviceType = req.params['service'];
+        try {
+            const serviceType = req.params['service'];
 
-        await Service.destroy({
-            where: {
-                type: serviceType
-            }
-        });
+            await Service.destroy({
+                where: {
+                    type: serviceType
+                }
+            });
 
-        successMessage.message = 'Service deleted';
-        res.status(201).send(successMessage);
+            successMessage.message = 'Service deleted';
+            res.status(201).send(successMessage);
+        } catch (err) {
+            errorHandler(err, res);
+        }
     });
 };
 
 export const registerAddition = (route: IRoute) => {
     route.post(async (req, res) => {
-        const { firstOperand, secondOperand } = req.body;
+        try {
+            const { firstOperand, secondOperand } = req.body.parameters;
 
-        const responseBody: APIOperationResult = {
-            $schema: 'api:operationResult',
-            result: Number(firstOperand) + Number(secondOperand)
-        };
+            const responseBody: APIOperationResult = {
+                $schema: 'api:operationResult',
+                result: Number(firstOperand) + Number(secondOperand)
+            };
 
-        res.status(200).send(responseBody);
+            res.status(200).send(responseBody);
+        } catch (err) {
+            errorHandler(err, res);
+        }
     });
 };
 
 export const registerSubstraction = (route: IRoute) => {
     route.post(async (req, res) => {
-        const { firstOperand, secondOperand } = req.body;
+        try {
+            const { firstOperand, secondOperand } = req.body.parameters;
 
-        const responseBody: APIOperationResult = {
-            $schema: 'api:operationResult',
-            result: Number(firstOperand) - Number(secondOperand)
-        };
+            const responseBody: APIOperationResult = {
+                $schema: 'api:operationResult',
+                result: Number(firstOperand) - Number(secondOperand)
+            };
 
-        res.status(200).send(responseBody);
+            res.status(200).send(responseBody);
+        } catch (err) {
+            errorHandler(err, res);
+        }
     });
 };
 
 export const registerMultiplication = (route: IRoute) => {
     route.post(async (req, res) => {
-        const { firstOperand, secondOperand } = req.body;
+        try {
+            const { firstOperand, secondOperand } = req.body.parameters;
 
-        const responseBody: APIOperationResult = {
-            $schema: 'api:operationResult',
-            result: Number(firstOperand) * Number(secondOperand)
-        };
+            const responseBody: APIOperationResult = {
+                $schema: 'api:operationResult',
+                result: Number(firstOperand) * Number(secondOperand)
+            };
 
-        res.status(200).send(responseBody);
+            res.status(200).send(responseBody);
+        } catch (err) {
+            errorHandler(err, res);
+        }
     });
 };
 
 export const registerDivision = (route: IRoute) => {
     route.post(async (req, res) => {
-        const { firstOperand, secondOperand } = req.body;
+        try {
+            const { firstOperand, secondOperand } = req.body.parameters;
 
-        const responseBody: APIOperationResult = {
-            $schema: 'api:operationResult',
-            result: Number(firstOperand) / Number(secondOperand)
-        };
+            if (Number(secondOperand) === 0) {
+                throw new Error('Division by zero is not allowed');
+            }
 
-        res.status(200).send(responseBody);
+            const responseBody: APIOperationResult = {
+                $schema: 'api:operationResult',
+                result: Number(firstOperand) / Number(secondOperand)
+            };
+
+            res.json(responseBody);
+        } catch (err) {
+            errorHandler(err, res);
+        }
     });
 };
 
 export const registerSquareRoot = (route: IRoute) => {
     route.post(async (req, res) => {
-        const { operand } = req.body;
+        try {
+            const { operand } = req.body.parameters;
 
-        const responseBody: APIOperationResult = {
-            $schema: 'api:operationResult',
-            result: Math.sqrt(Number(operand))
-        };
+            if (operand === undefined) {
+                throw new Error(
+                    'Square root operation is missing required property: /parameters/operand'
+                );
+            }
+            if (operand < 0) {
+                throw new Error(
+                    'Square root operation property /parameters/operand cannot be a negative number'
+                );
+            }
 
-        res.status(200).send(responseBody);
+            const responseBody: APIOperationResult = {
+                $schema: 'api:operationResult',
+                result: Math.sqrt(Number(operand))
+            };
+
+            res.status(200).send(responseBody);
+        } catch (err) {
+            errorHandler(err, res, 400);
+        }
     });
 };
 
 export const registerRandomString = (route: IRoute) => {
     route.post(async (req, res) => {
-        const {
-            length,
-            digits,
-            lowerAlphabetic,
-            upperAlphabetic,
-            unique
-        } = req.body;
+        try {
+            const {
+                length,
+                digits,
+                lowerAlphabetic,
+                upperAlphabetic,
+                unique
+            } = req.body.parameters;
 
-        const externalServiceURL = `https://www.random.org/strings/?num=1&len=${
-            length || 10
-        }&digits=${digits ? 'on' : 'off'}&upperalpha=${
-            upperAlphabetic ? 'on' : 'off'
-        }&loweralpha=${lowerAlphabetic ? 'on' : 'off'}&unique=${
-            unique ? 'on' : 'off'
-        }&format=plain&rnd=new`;
+            const externalServiceURL = `https://www.random.org/strings/?num=1&len=${
+                length || 10
+            }&digits=${digits ? 'on' : 'off'}&upperalpha=${
+                upperAlphabetic ? 'on' : 'off'
+            }&loweralpha=${lowerAlphabetic ? 'on' : 'off'}&unique=${
+                unique ? 'on' : 'off'
+            }&format=plain&rnd=new`;
 
-        console.log('externalServiceURL', externalServiceURL);
+            const externalServiceResponse = await axios.get<string>(
+                externalServiceURL
+            );
+            const randomString = externalServiceResponse.data.replace('\n', '');
 
-        const externalServiceResponse = await axios.get<string>(
-            externalServiceURL
-        );
-        const randomString = externalServiceResponse.data;
+            const responseBody: APIOperationResult = {
+                $schema: 'api:operationResult',
+                result: randomString
+            };
 
-        const responseBody: APIOperationResult = {
-            $schema: 'api:operationResult',
-            result: randomString
-        };
-
-        res.status(200).send(responseBody);
+            res.status(200).send(responseBody);
+        } catch (err) {
+            errorHandler(err, res);
+        }
     });
 };
