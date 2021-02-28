@@ -1,7 +1,7 @@
 'use strict';
 const { Model, DataTypes } = require('sequelize');
 
-class User extends Model {
+class Service extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,29 +12,22 @@ class User extends Model {
     }
 }
 
-const initUser = (sequelize) => {
-    User.init(
+const initService = (sequelize) => {
+    Service.init(
         {
             uuid: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true
             },
-            username: {
-                type: DataTypes.STRING,
-                unique: true
-            },
-            role: {
-                type: DataTypes.STRING,
-                defaultValue: 'user'
+            type: DataTypes.STRING,
+            cost: {
+                type: DataTypes.FLOAT,
+                defaultValue: 0.0
             },
             status: {
                 type: DataTypes.STRING,
-                defaultValue: 'trial'
-            },
-            status: {
-                type: DataTypes.STRING,
-                defaultValue: 'trial'
+                defaultValue: 'active'
             },
             isDeleted: {
                 type: DataTypes.BOOLEAN,
@@ -43,10 +36,11 @@ const initUser = (sequelize) => {
         },
         {
             sequelize,
-            modelName: 'User',
+            modelName: 'Service',
             timestamps: false
         }
     );
+    return Service;
 };
 
-export { User, initUser };
+export { Service, initService };

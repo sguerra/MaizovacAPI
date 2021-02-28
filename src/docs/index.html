@@ -804,7 +804,13 @@
                                                                         ><span
                                                                             class="required"
                                                                             >required</span
-                                                                        >(string)</em
+                                                                        >(one of
+                                                                        addition,
+                                                                        substraction,
+                                                                        multiplication,
+                                                                        division,
+                                                                        square_root,
+                                                                        random_string)</em
                                                                     >
                                                                 </li>
                                                             </ul>
@@ -1037,10 +1043,106 @@
                                                                         ><span
                                                                             class="required"
                                                                             >required</span
-                                                                        >(string)</em
+                                                                        >(one of
+                                                                        addition,
+                                                                        substraction,
+                                                                        multiplication,
+                                                                        division,
+                                                                        square_root,
+                                                                        random_string)</em
                                                                     >
                                                                 </li>
                                                             </ul>
+                                                            <h3>Body</h3>
+                                                            <p>
+                                                                <strong
+                                                                    >Media
+                                                                    type</strong
+                                                                >:
+                                                                application/json
+                                                            </p>
+                                                            <p>
+                                                                <strong
+                                                                    >Type</strong
+                                                                >: json
+                                                            </p>
+                                                            <p>
+                                                                <strong
+                                                                    >Content</strong
+                                                                >:
+                                                            </p>
+                                                            <pre><code>{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "API Operation",
+    "type": "object",
+    "definitions": {
+        "singleOperation": {
+            "type": "object",
+            "properties": {
+                "operand": {
+                    "type": "number"
+                }
+            }
+        },
+        "binaryOperation": {
+            "type": "object",
+            "properties": {
+                "firstOperand": {
+                    "type": "number"
+                },
+                "secondOperand": {
+                    "type": "number"
+                }
+            }
+        },
+        "randomStringOperation": {
+            "type": "object",
+            "properties": {
+                "length": {
+                    "type": "number",
+                    "minimum": 1,
+                    "default": 10,
+                    "maximum": 20
+                },
+                "digits": {
+                    "type": "boolean"
+                },
+                "upperAlphabetic": {
+                    "type": "boolean"
+                },
+                "lowerAlphabetic": {
+                    "type": "boolean"
+                },
+                "unique": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "length",
+                "digits",
+                "upperAlphabetic",
+                "lowerAlphabetic",
+                "unique"
+            ]
+        }
+    },
+    "properties": {
+        "$schema": {
+            "enum": ["api:operation"],
+            "type": "string"
+        },
+        "parameters": {
+            "anyOf": [
+                { "$ref": "#/definitions/singleOperation" },
+                { "$ref": "#/definitions/binaryOperation" },
+                { "$ref": "#/definitions/randomStringOperation" }
+            ]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["parameters"]
+}
+</code></pre>
                                                         </div>
                                                         <div
                                                             class="tab-pane"
@@ -1049,9 +1151,9 @@
                                                             <h2>
                                                                 HTTP status code
                                                                 <a
-                                                                    href="http://httpstatus.es/201"
+                                                                    href="http://httpstatus.es/200"
                                                                     target="_blank"
-                                                                    >201</a
+                                                                    >200</a
                                                                 >
                                                             </h2>
                                                             <h3>Body</h3>
@@ -1074,19 +1176,19 @@
                                                             </p>
                                                             <pre><code>{
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "API success",
+    "title": "API Operation Result",
     "type": "object",
     "properties": {
         "$schema": {
-            "enum": ["api:success"],
+            "enum": ["api:operationResult"],
             "type": "string"
         },
-        "message": {
-            "type": "string"
+        "result": {
+            "anyOf": [{ "type": "number" }, { "type": "string" }]
         }
     },
     "additionalProperties": false,
-    "required": ["$schema", "message"]
+    "required": ["result"]
 }
 </code></pre>
                                                             <h2>

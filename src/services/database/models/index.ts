@@ -1,2 +1,4 @@
 import { User, initUser } from './user';
-export { User, initUser };
+import { Service, initService } from './service';
+
+export { User, initUser, Service, initService };

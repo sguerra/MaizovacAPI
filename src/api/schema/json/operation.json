@@ -1,0 +1,71 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "API Operation",
+    "type": "object",
+    "definitions": {
+        "singleOperation": {
+            "type": "object",
+            "properties": {
+                "operand": {
+                    "type": "number"
+                }
+            }
+        },
+        "binaryOperation": {
+            "type": "object",
+            "properties": {
+                "firstOperand": {
+                    "type": "number"
+                },
+                "secondOperand": {
+                    "type": "number"
+                }
+            }
+        },
+        "randomStringOperation": {
+            "type": "object",
+            "properties": {
+                "length": {
+                    "type": "number",
+                    "minimum": 1,
+                    "default": 10,
+                    "maximum": 20
+                },
+                "digits": {
+                    "type": "boolean"
+                },
+                "upperAlphabetic": {
+                    "type": "boolean"
+                },
+                "lowerAlphabetic": {
+                    "type": "boolean"
+                },
+                "unique": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "length",
+                "digits",
+                "upperAlphabetic",
+                "lowerAlphabetic",
+                "unique"
+            ]
+        }
+    },
+    "properties": {
+        "$schema": {
+            "enum": ["api:operation"],
+            "type": "string"
+        },
+        "parameters": {
+            "anyOf": [
+                { "$ref": "#/definitions/singleOperation" },
+                { "$ref": "#/definitions/binaryOperation" },
+                { "$ref": "#/definitions/randomStringOperation" }
+            ]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["parameters"]
+}

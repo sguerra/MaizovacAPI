@@ -1,5 +1,5 @@
 import { Sequelize, DataTypes, Model, Optional, ModelStatic } from 'sequelize';
-import { initUser } from './models';
+import { initUser, initService } from './models';
 
 export default class DatabaseService {
     private sequelize: Sequelize;
@@ -19,6 +19,7 @@ export default class DatabaseService {
 
     init() {
         initUser(this.sequelize);
+        initService(this.sequelize);
     }
 
     async sync() {

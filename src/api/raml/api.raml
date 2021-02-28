@@ -11,6 +11,8 @@ types:
     api:success: !include ../schema/json/success.json
     api:collection: !include ../schema/json/collection.json
     api:service: !include ../schema/json/service.json
+    api:operation: !include ../schema/json/operation.json
+    api:operationResult: !include ../schema/json/operationResult.json
     api:user: !include ../schema/json/user.json
     api:role: !include ../schema/json/role.json
     api:record: !include ../schema/json/record.json
@@ -47,6 +49,7 @@ types:
         /{service}:
             uriParameters:
                 service:
+                    enum: ["addition", "substraction", "multiplication", "division", "square_root", "random_string"]
                     type: "string"
             get:
                 description: Get an API service detail
@@ -60,10 +63,12 @@ types:
             /calculate:
                 post:
                     description: Call calculate method of a service
+                    body:
+                        type: api:operation
                     responses:
-                        201:
+                        200:
                             body:
-                                type: api:success
+                                type: api:operationResult
                         404:
                             body:
                                 type: api:error

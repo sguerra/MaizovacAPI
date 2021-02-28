@@ -12,7 +12,11 @@
     "schema2type": "npm run json2ts -i src/api/schema/json/ -o src/api/schema/types/",
     "copy-files": "mkdir -p ./dist/api/raml && cp ./src/api/raml/* ./dist/api/raml/ && mkdir -p ./dist/docs && cp ./src/docs/* ./dist/docs/",
     "osprey": "node_modules/osprey/bin/osprey.js -f .src/api/raml/api.raml -p 8080 -a localhost:3000",
-    "raml2html": "mkdir -p ./src/docs && raml2html ./src/api/raml/api.raml > ./src/docs/index.html"
+    "raml2html": "mkdir -p ./src/docs && raml2html ./src/api/raml/api.raml > ./src/docs/index.html",
+    "db-migration": "npx sequelize-cli db:migrate",
+    "db-migration-undo": "npx sequelize-cli db:migrate:undo",
+    "db-seed": "npx sequelize-cli db:seed:all",
+    "db-seed-undo": "npx sequelize-cli db:seed:undo:all"
   },
   "repository": {
     "type": "git",
@@ -25,6 +29,7 @@
   },
   "homepage": "https://github.com/sguerra/MaizovacAPI#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-json-validator-middleware": "^2.1.1",

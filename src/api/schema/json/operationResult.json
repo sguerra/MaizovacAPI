@@ -1,0 +1,16 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "API Operation Result",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "enum": ["api:operationResult"],
+            "type": "string"
+        },
+        "result": {
+            "anyOf": [{ "type": "number" }, { "type": "string" }]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["result"]
+}
