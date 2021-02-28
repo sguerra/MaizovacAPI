@@ -10,7 +10,7 @@ const successMessage: APISuccess = {
 
 export const register = (route: IRoute) => {
     route.get(async (req, res) => {
-        const userCollection = await User.findAll();
+        const userCollection = (await User.findAll()) as any;
 
         const responseBody: APICollection = {
             $schema: 'api:collection',

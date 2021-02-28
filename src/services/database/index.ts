@@ -1,5 +1,5 @@
 import { Sequelize, DataTypes, Model, Optional, ModelStatic } from 'sequelize';
-import { User } from './models';
+import { initUser } from './models';
 
 export default class DatabaseService {
     private sequelize: Sequelize;
@@ -18,31 +18,7 @@ export default class DatabaseService {
     }
 
     init() {
-        User.init(
-            {
-                uuid: {
-                    type: DataTypes.UUID,
-                    defaultValue: DataTypes.UUIDV4,
-                    primaryKey: true
-                },
-                username: {
-                    type: DataTypes.STRING,
-                    unique: true
-                },
-                role: {
-                    type: DataTypes.STRING,
-                    defaultValue: 'user'
-                },
-                status: {
-                    type: DataTypes.STRING,
-                    defaultValue: 'trial'
-                }
-            },
-            {
-                tableName: 'users',
-                sequelize: this.sequelize
-            }
-        );
+        initUser(this.sequelize);
     }
 
     async sync() {

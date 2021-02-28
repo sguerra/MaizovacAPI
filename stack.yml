@@ -6,8 +6,8 @@ services:
         build: .
         image: maizovac-api
         environment: 
-            PORT: $PORT
-            DB_CONNECTION_STRING: $DB_CONNECTION_STRING
+            PORT: $PORT_PROD
+            DB_CONNECTION_STRING: $DB_CONNECTION_STRING_PROD
         ports:
             - 3000:3000
 
@@ -21,9 +21,9 @@ services:
         ports:
         - 5432:5432
         environment:
-            POSTGRES_USER: $POSTGRES_USER
-            POSTGRES_PASSWORD: $POSTGRES_PASSWORD
-            POSTGRES_DB: $POSTGRES_DB
+            POSTGRES_USER: $DATABASE_USER_PROD
+            POSTGRES_PASSWORD: $DATABASE_PASSWORD_PROD
+            POSTGRES_DB: $DATABASE_NAME_PROD
         networks:
             - db
 
@@ -32,6 +32,8 @@ services:
         restart: always
         ports:
         - 8080:8080
+        networks:
+            - db
 
 networks:
     db:
