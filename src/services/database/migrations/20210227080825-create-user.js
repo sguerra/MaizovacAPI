@@ -19,9 +19,16 @@ module.exports = {
                 type: DataTypes.STRING,
                 defaultValue: 'trial'
             },
-            isDeleted: {
-                type: DataTypes.BOOLEAN,
-                defaultValue: false
+            createdAt: {
+                allowNull: false,
+                type: DataTypes.DATE
+            },
+            updatedAt: {
+                allowNull: false,
+                type: DataTypes.DATE
+            },
+            deletedAt: {
+                type: DataTypes.DATE
             }
         });
     },

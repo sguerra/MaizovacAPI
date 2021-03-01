@@ -36,15 +36,15 @@ const initUser = (sequelize) => {
                 type: DataTypes.STRING,
                 defaultValue: 'trial'
             },
-            isDeleted: {
-                type: DataTypes.BOOLEAN,
-                defaultValue: false
+            deletedAt: {
+                type: DataTypes.DATE
             }
         },
         {
             sequelize,
             modelName: 'User',
-            timestamps: false
+            timestamps: true,
+            paranoid: true
         }
     );
 };

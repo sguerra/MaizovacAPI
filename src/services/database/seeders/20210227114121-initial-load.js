@@ -8,7 +8,8 @@ module.exports = {
                 username: 'root@example.com',
                 role: 'admin',
                 status: 'active',
-                isDeleted: false
+                createdAt: new Date(),
+                updatedAt: new Date()
             }
         ]);
 
@@ -18,42 +19,48 @@ module.exports = {
                 type: 'addition',
                 cost: 0.15,
                 status: 'active',
-                isDeleted: false
+                createdAt: new Date(),
+                updatedAt: new Date()
             },
             {
                 uuid: 'b8fdd6f8-3474-4d6b-9eca-4ca69d01ad75',
                 type: 'substraction',
                 cost: 0.15,
                 status: 'active',
-                isDeleted: false
+                createdAt: new Date(),
+                updatedAt: new Date()
             },
             {
                 uuid: 'ae364430-665b-45fc-aec7-5860cc0a6258',
                 type: 'multiplication',
                 cost: 0.25,
                 status: 'active',
-                isDeleted: false
+                createdAt: new Date(),
+                updatedAt: new Date()
             },
             {
                 uuid: '9cede416-4d5f-402b-a721-931d2bdb88a7',
                 type: 'division',
                 cost: 0.25,
                 status: 'active',
-                isDeleted: false
+                createdAt: new Date(),
+                updatedAt: new Date()
             },
             {
                 uuid: '366f4075-9669-4459-b946-8737828b868b',
                 type: 'square_root',
                 cost: 0.25,
                 status: 'active',
-                isDeleted: false
+                createdAt: new Date(),
+                updatedAt: new Date()
             },
             {
                 uuid: '2c299e06-4547-4525-b1a3-be3c1d9e686a',
                 type: 'random_string',
                 cost: 0.35,
                 status: 'active',
-                isDeleted: false
+                createdAt: new Date(),
+                updatedAt: new Date()
             }
         ]);
     },

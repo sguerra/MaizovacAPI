@@ -28,16 +28,13 @@ const initService = (sequelize) => {
             status: {
                 type: DataTypes.STRING,
                 defaultValue: 'active'
-            },
-            isDeleted: {
-                type: DataTypes.BOOLEAN,
-                defaultValue: false
             }
         },
         {
             sequelize,
             modelName: 'Service',
-            timestamps: false
+            timestamps: true,
+            paranoid: true
         }
     );
     return Service;
