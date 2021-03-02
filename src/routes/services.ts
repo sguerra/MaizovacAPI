@@ -1,10 +1,11 @@
 import { IRoute } from 'express';
 import { errorHandler } from '../utils';
 import { APISuccess } from '../api/schema/types/success';
-import { APICollection } from '../api/schema/types/collection';
+import { APICollection, APIService } from '../api/schema/types/collection';
 import { APIOperationResult } from '../api/schema/types/operationResult';
-import { Service } from '../services/database/models';
-import axios from 'axios';
+import { Service, Record } from '../services/database/models';
+import { OperationService } from '../services/internal';
+import { RandomService } from '../services/external';
 
 const successMessage: APISuccess = {
     $schema: 'api:success',
@@ -89,133 +90,54 @@ export const registerDetail = (route: IRoute) => {
     });
 };
 
-export const registerAddition = (route: IRoute) => {
+export const registerOperation = (route: IRoute) => {
     route.post(async (req, res) => {
         try {
-            const { firstOperand, secondOperand } = req.body.parameters;
+            let serviceResult;
+            let currentUsername = process.env.DEFAULT_USERNAME;
+            const serviceType = req.params['service'];
+            const parameters = req.body['parameters'];
 
-            const responseBody: APIOperationResult = {
-                $schema: 'api:operationResult',
-                result: Number(firstOperand) + Number(secondOperand)
-            };
-
-            res.status(200).send(responseBody);
-        } catch (err) {
-            errorHandler(err, res);
-        }
-    });
-};
-
-export const registerSubstraction = (route: IRoute) => {
-    route.post(async (req, res) => {
-        try {
-            const { firstOperand, secondOperand } = req.body.parameters;
-
-            const responseBody: APIOperationResult = {
-                $schema: 'api:operationResult',
-                result: Number(firstOperand) - Number(secondOperand)
-            };
-
-            res.status(200).send(responseBody);
-        } catch (err) {
-            errorHandler(err, res);
-        }
-    });
-};
-
-export const registerMultiplication = (route: IRoute) => {
-    route.post(async (req, res) => {
-        try {
-            const { firstOperand, secondOperand } = req.body.parameters;
-
-            const responseBody: APIOperationResult = {
-                $schema: 'api:operationResult',
-                result: Number(firstOperand) * Number(secondOperand)
-            };
-
-            res.status(200).send(responseBody);
-        } catch (err) {
-            errorHandler(err, res);
-        }
-    });
-};
-
-export const registerDivision = (route: IRoute) => {
-    route.post(async (req, res) => {
-        try {
-            const { firstOperand, secondOperand } = req.body.parameters;
-
-            if (Number(secondOperand) === 0) {
-                throw new Error('Division by zero is not allowed');
+            if (!currentUsername) {
+                throw new Error('The current user is not signed in');
             }
 
-            const responseBody: APIOperationResult = {
-                $schema: 'api:operationResult',
-                result: Number(firstOperand) / Number(secondOperand)
-            };
-
-            res.json(responseBody);
-        } catch (err) {
-            errorHandler(err, res);
-        }
-    });
-};
-
-export const registerSquareRoot = (route: IRoute) => {
-    route.post(async (req, res) => {
-        try {
-            const { operand } = req.body.parameters;
-
-            if (operand === undefined) {
-                throw new Error(
-                    'Square root operation is missing required property: /parameters/operand'
-                );
+            switch (serviceType) {
+                case 'addition':
+                    serviceResult = OperationService.addition(parameters);
+                    break;
+                case 'substraction':
+                    serviceResult = OperationService.substraction(parameters);
+                    break;
+                case 'multiplication':
+                    serviceResult = OperationService.multiplication(parameters);
+                    break;
+                case 'division':
+                    serviceResult = OperationService.division(parameters);
+                    break;
+                case 'square_root':
+                    serviceResult = OperationService.squareRoot(parameters);
+                    break;
+                case 'random_string':
+                    serviceResult = await RandomService.randomString(
+                        parameters
+                    );
+                    break;
+                default:
+                    throw new Error(
+                        `Service type '${serviceType}' is not allowed`
+                    );
             }
-            if (operand < 0) {
-                throw new Error(
-                    'Square root operation property /parameters/operand cannot be a negative number'
-                );
-            }
 
-            const responseBody: APIOperationResult = {
-                $schema: 'api:operationResult',
-                result: Math.sqrt(Number(operand))
-            };
-
-            res.status(200).send(responseBody);
-        } catch (err) {
-            errorHandler(err, res, 400);
-        }
-    });
-};
-
-export const registerRandomString = (route: IRoute) => {
-    route.post(async (req, res) => {
-        try {
-            const {
-                length,
-                digits,
-                lowerAlphabetic,
-                upperAlphabetic,
-                unique
-            } = req.body.parameters;
-
-            const externalServiceURL = `https://www.random.org/strings/?num=1&len=${
-                length || 10
-            }&digits=${digits ? 'on' : 'off'}&upperalpha=${
-                upperAlphabetic ? 'on' : 'off'
-            }&loweralpha=${lowerAlphabetic ? 'on' : 'off'}&unique=${
-                unique ? 'on' : 'off'
-            }&format=plain&rnd=new`;
-
-            const externalServiceResponse = await axios.get<string>(
-                externalServiceURL
+            await Record.insert(
+                currentUsername,
+                serviceType,
+                serviceResult.toString()
             );
-            const randomString = externalServiceResponse.data.replace('\n', '');
 
             const responseBody: APIOperationResult = {
                 $schema: 'api:operationResult',
-                result: randomString
+                result: serviceResult
             };
 
             res.status(200).send(responseBody);

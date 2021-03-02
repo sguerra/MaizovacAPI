@@ -7,6 +7,7 @@ services:
         image: maizovac-api
         environment: 
             PORT: $PORT_PROD
+            DEFAULT_USERNAME: $DEFAULT_USERNAME
             DB_CONNECTION_STRING: $DB_CONNECTION_STRING_PROD
         ports:
             - 3000:3000

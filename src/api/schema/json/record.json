@@ -9,8 +9,26 @@
         },
         "uuid": {
             "type": "string"
+        },
+        "service": {
+            "type": "object"
+        },
+        "user": {
+            "type": "object"
+        },
+        "cost": {
+            "type": "number"
+        },
+        "balance": {
+            "type": "number"
+        },
+        "response": {
+            "type": "string"
+        },
+        "date": {
+            "type": "string"
         }
     },
     "additionalProperties": false,
-    "required": ["$schema", "uuid"]
+    "required": ["service", "user"]
 }

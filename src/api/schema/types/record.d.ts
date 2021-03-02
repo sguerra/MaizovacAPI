@@ -6,6 +6,16 @@
  */
 
 export interface APIRecord {
-    $schema: 'api:record';
-    uuid: string;
+    $schema?: 'api:record';
+    uuid?: string;
+    service: {
+        [k: string]: unknown;
+    };
+    user: {
+        [k: string]: unknown;
+    };
+    cost?: number;
+    balance?: number;
+    response?: string;
+    date?: string;
 }

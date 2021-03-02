@@ -10,8 +10,17 @@ export interface APICollection {
     items: (APIService | APIUser | APIRole | APIRecord | APIBalance)[];
 }
 export interface APIService {
-    $schema: 'api:service';
-    uuid: string;
+    $schema?: 'api:service';
+    uuid?: string;
+    type:
+        | 'addition'
+        | 'subtraction'
+        | 'multiplication'
+        | 'division'
+        | 'square_root'
+        | 'random_string';
+    cost?: number;
+    status?: 'active' | 'beta' | 'inactive';
 }
 export interface APIUser {
     $schema?: 'api:user';
@@ -25,8 +34,18 @@ export interface APIRole {
     uuid: string;
 }
 export interface APIRecord {
-    $schema: 'api:record';
-    uuid: string;
+    $schema?: 'api:record';
+    uuid?: string;
+    service: {
+        [k: string]: unknown;
+    };
+    user: {
+        [k: string]: unknown;
+    };
+    cost?: number;
+    balance?: number;
+    response?: string;
+    date?: string;
 }
 export interface APIBalance {
     $schema: 'api:balance';
