@@ -17,9 +17,21 @@ types:
     api:role: !include ../schema/json/role.json
     api:record: !include ../schema/json/record.json
     api:balance: !include ../schema/json/balance.json
-    api:profile: !include ../schema/json/profile.json
     api:session: !include ../schema/json/session.json
     
+traits:
+    collection:
+        responses:
+            200:
+                body:
+                    type: api:collection
+            404:
+                body:
+                    type: api:error
+            500:
+                body:
+                    type: api:error
+
 
 /{version}:
     description: API version
@@ -39,13 +51,7 @@ types:
     /services:
         get:
             description: Get API services
-            responses:
-                200:
-                    body:
-                        type: api:collection
-                404:
-                    body:
-                        type: api:error
+            is: [ collection ]
         /{service}:
             uriParameters:
                 service:
@@ -72,16 +78,13 @@ types:
                         404:
                             body:
                                 type: api:error
+                        500:
+                            body:
+                                type: api:error
     /users:
         get:
             description: Get a collection of users
-            responses:
-                200:
-                    body:
-                        type: api:collection
-                404:
-                    body:
-                        type: api:error
+            is: [ collection ]
         post:
             description: Create a new user
             body:
@@ -129,43 +132,30 @@ types:
     /roles:
         get:
             description: Get all roles
-            responses:
-                200:
-                    body:
-                        type: api:collection
-                404:
-                    body:
-                        type: api:error
+            is: [ collection ]
     /records:
         get:
             description: Get a collection of records
-            responses:
-                200:
-                    body:
-                        type: api:collection
-                404:
-                    body:
-                        type: api:error
+            is: [ collection ]
     /balance:
         get:
             description: Get a collection of user balances
             responses:
-                200:
-                    body:
-                        type: api:collection
-                404:
-                    body:
-                        type: api:error
+            is: [ collection ]
     /profile:
         get:
-            description: Get current user profile
+            description: Get current user information and balance
             responses:
                 200:
                     body:
-                        type: api:profile
+                        type: api:balance
                 404:
                     body:
                         type: api:error
+        /records:
+            get:
+                description: Get a collection of records for current user
+                is: [ collection ]
     /session:
         get:
             description: Get the current user session

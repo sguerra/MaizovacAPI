@@ -1,3 +1,4 @@
+import AuthenticationService from './authentication';
 import RandomService from './random';
 
-export { RandomService };
+export { AuthenticationService, RandomService };

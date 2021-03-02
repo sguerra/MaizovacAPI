@@ -6,6 +6,9 @@
  */
 
 export interface APIBalance {
-    $schema: 'api:balance';
-    uuid: string;
+    $schema?: 'api:balance';
+    user: {
+        [k: string]: unknown;
+    };
+    balance: number;
 }

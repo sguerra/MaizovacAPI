@@ -4,6 +4,7 @@ import * as Users from './users';
 import * as Services from './services';
 import * as Records from './records';
 import * as Roles from './roles';
+import * as Profile from './profile';
 
 export const register = (app: Application) => {
     // Register routes
@@ -17,4 +18,6 @@ export const register = (app: Application) => {
         app.route('/:version/services/:service/calculate')
     );
     Records.register(app.route('/:version/records'));
+    Profile.register(app.route('/:version/profile'));
+    Profile.registerRecords(app.route('/:version/profile/records'));
 };

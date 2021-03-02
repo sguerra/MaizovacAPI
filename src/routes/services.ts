@@ -5,7 +5,7 @@ import { APICollection, APIService } from '../api/schema/types/collection';
 import { APIOperationResult } from '../api/schema/types/operationResult';
 import { Service, Record } from '../services/database/models';
 import { OperationService } from '../services/internal';
-import { RandomService } from '../services/external';
+import { AuthenticationService, RandomService } from '../services/external';
 
 const successMessage: APISuccess = {
     $schema: 'api:success',
@@ -94,7 +94,7 @@ export const registerOperation = (route: IRoute) => {
     route.post(async (req, res) => {
         try {
             let serviceResult;
-            let currentUsername = process.env.DEFAULT_USERNAME;
+            let currentUsername = AuthenticationService.getCurrentUsername();
             const serviceType = req.params['service'];
             const parameters = req.body['parameters'];
 

@@ -7,10 +7,13 @@
             "enum": ["api:balance"],
             "type": "string"
         },
-        "uuid": {
-            "type": "string"
+        "user": {
+            "type": "object"
+        },
+        "balance": {
+            "type": "number"
         }
     },
     "additionalProperties": false,
-    "required": ["$schema", "uuid"]
+    "required": ["user", "balance"]
 }
