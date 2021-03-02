@@ -3143,13 +3143,14 @@
                                             <a
                                                 class="collapsed"
                                                 data-toggle="collapse"
-                                                href="#panel_version__balance"
+                                                href="#panel_version__balances"
                                                 ><span class="parent"
                                                     >/{version}</span
-                                                >/balance</a
+                                                >/balances</a
                                             >
                                             <span class="methods"
-                                                ><a href="#version__balance_get"
+                                                ><a
+                                                    href="#version__balances_get"
                                                     ><span
                                                         class="badge badge_get"
                                                         >get</span
@@ -3159,13 +3160,13 @@
                                         </h4>
                                     </div>
                                     <div
-                                        id="panel_version__balance"
+                                        id="panel_version__balances"
                                         class="panel-collapse collapse"
                                     >
                                         <div class="panel-body">
                                             <div class="list-group">
                                                 <div
-                                                    onclick="window.location.href = '#version__balance_get'"
+                                                    onclick="window.location.href = '#version__balances_get'"
                                                     class="list-group-item"
                                                 >
                                                     <span
@@ -3188,7 +3189,7 @@
                                     <div
                                         class="modal fade"
                                         tabindex="0"
-                                        id="version__balance_get"
+                                        id="version__balances_get"
                                     >
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
@@ -3211,7 +3212,7 @@
                                                         >
                                                         <span class="parent"
                                                             >/{version}</span
-                                                        >/balance
+                                                        >/balances
                                                     </h4>
                                                 </div>
                                                 <div class="modal-body">
@@ -3226,14 +3227,14 @@
                                                     <ul class="nav nav-tabs">
                                                         <li class="active">
                                                             <a
-                                                                href="#version__balance_get_request"
+                                                                href="#version__balances_get_request"
                                                                 data-toggle="tab"
                                                                 >Request</a
                                                             >
                                                         </li>
                                                         <li>
                                                             <a
-                                                                href="#version__balance_get_response"
+                                                                href="#version__balances_get_response"
                                                                 data-toggle="tab"
                                                                 >Response</a
                                                             >
@@ -3242,7 +3243,7 @@
                                                     <div class="tab-content">
                                                         <div
                                                             class="tab-pane active"
-                                                            id="version__balance_get_request"
+                                                            id="version__balances_get_request"
                                                         >
                                                             <h3>
                                                                 URI Parameters
@@ -3263,7 +3264,7 @@
                                                         </div>
                                                         <div
                                                             class="tab-pane"
-                                                            id="version__balance_get_response"
+                                                            id="version__balances_get_response"
                                                         >
                                                             <h2>
                                                                 HTTP status code
@@ -3577,7 +3578,7 @@
             "enum": ["api:balance"],
             "type": "string"
         },
-        "user": {
+        "User": {
             "type": "object"
         },
         "balance": {
@@ -3585,7 +3586,7 @@
         }
     },
     "additionalProperties": false,
-    "required": ["user", "balance"]
+    "required": ["User", "balance"]
 }
 </code></pre>
                                                             <h2>

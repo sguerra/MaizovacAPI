@@ -1,6 +1,5 @@
 import { IRoute } from 'express';
 import { errorHandler } from '../utils';
-import { APIBalance } from '../api/schema/types/balance';
 import { APICollection } from '../api/schema/types/collection';
 import { AuthenticationService } from '../services/external';
 import { User, Record } from '../services/database/models';
@@ -10,29 +9,14 @@ export const register = (route: IRoute) => {
         try {
             let currentUsername = AuthenticationService.getCurrentUsername();
 
-            const user = (await User.findOne({
-                where: {
-                    username: currentUsername
-                }
-            })) as any;
+            const currentBalance = await Record.findCurrentBalance(
+                currentUsername
+            );
 
-            const record = (await Record.findOne({
-                where: {
-                    userId: user['uuid']
-                },
-                order: [['date', 'DESC']]
-            })) as any;
-
-            let balance = 0;
-
-            if (record) {
-                balance = record['balance'];
-            }
-
-            const responseBody: APIBalance = {
+            const responseBody = {
                 $schema: 'api:balance',
-                user: user,
-                balance: balance
+                User: currentBalance['User'],
+                balance: currentBalance['balance']
             };
 
             res.send(responseBody);
@@ -47,22 +31,13 @@ export const registerRecords = (route: IRoute) => {
         try {
             let currentUsername = AuthenticationService.getCurrentUsername();
 
-            const user = (await User.findOne({
-                where: {
-                    username: currentUsername
-                }
-            })) as any;
+            const currentRecords = await Record.findCurrentRecords(
+                currentUsername
+            );
 
-            const records = (await Record.findAll({
-                where: {
-                    userId: user['uuid']
-                },
-                order: [['date', 'DESC']]
-            })) as any;
-
-            const responseBody: APICollection = {
+            const responseBody = {
                 $schema: 'api:collection',
-                items: records
+                items: currentRecords
             };
 
             res.send(responseBody);

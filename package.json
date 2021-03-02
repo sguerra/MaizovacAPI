@@ -14,7 +14,7 @@
     "osprey": "node_modules/osprey/bin/osprey.js -f .src/api/raml/api.raml -p 8080 -a localhost:3000",
     "raml2html": "mkdir -p ./src/docs && raml2html ./src/api/raml/api.raml > ./src/docs/index.html",
     "db-migration": "npx sequelize-cli db:migrate",
-    "db-migration-undo": "npx sequelize-cli db:migrate:undo",
+    "db-migration-undo": "npx sequelize-cli db:migrate:undo:all",
     "db-seed": "npx sequelize-cli db:seed:all",
     "db-seed-undo": "npx sequelize-cli db:seed:undo:all"
   },

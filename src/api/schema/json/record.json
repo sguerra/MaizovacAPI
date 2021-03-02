@@ -10,10 +10,10 @@
         "uuid": {
             "type": "string"
         },
-        "service": {
+        "Service": {
             "type": "object"
         },
-        "user": {
+        "User": {
             "type": "object"
         },
         "cost": {

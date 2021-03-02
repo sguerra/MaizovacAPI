@@ -8,10 +8,12 @@ module.exports = {
                 defaultValue: DataTypes.UUIDV4
             },
             serviceId: {
-                type: DataTypes.UUID
+                type: DataTypes.UUID,
+                foreignKey: true
             },
             userId: {
-                type: DataTypes.UUID
+                type: DataTypes.UUID,
+                foreignKey: true
             },
             cost: {
                 type: DataTypes.FLOAT

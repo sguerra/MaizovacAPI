@@ -59,6 +59,58 @@ class Record extends Model {
             date: new Date()
         });
     }
+
+    /**
+     * Get current user balance from latest balance update
+     * @param {string} username
+     */
+    static async findCurrentBalance(username) {
+        const user = await User.findOne({
+            where: {
+                username: username
+            }
+        });
+
+        const record = await Record.findOne({
+            where: {
+                userId: user['uuid']
+            },
+            order: [['date', 'DESC']]
+        });
+
+        let balance = 0;
+
+        if (record) {
+            balance = record['balance'];
+        }
+
+        return {
+            User: user,
+            balance: balance
+        };
+    }
+
+    /**
+     * Get current user records
+     * @param {string} username
+     */
+    static async findCurrentRecords(username) {
+        const user = await User.findOne({
+            where: {
+                username: username
+            }
+        });
+
+        const currentRecords = await Record.findAll({
+            where: {
+                userId: user['uuid']
+            },
+            order: [['date', 'DESC']],
+            include: [{ model: User }, { model: Service }]
+        });
+
+        return currentRecords;
+    }
 }
 
 const initRecord = (sequelize) => {
@@ -70,10 +122,12 @@ const initRecord = (sequelize) => {
                 primaryKey: true
             },
             serviceId: {
-                type: DataTypes.UUID
+                type: DataTypes.UUID,
+                foreignKey: true
             },
             userId: {
-                type: DataTypes.UUID
+                type: DataTypes.UUID,
+                foreignKey: true
             },
             cost: DataTypes.FLOAT,
             balance: DataTypes.FLOAT,
@@ -87,6 +141,15 @@ const initRecord = (sequelize) => {
             paranoid: true
         }
     );
+
+    Record.belongsTo(User, {
+        foreignKey: 'userId'
+    });
+
+    Record.belongsTo(Service, {
+        foreignKey: 'serviceId'
+    });
+
     return Record;
 };
 

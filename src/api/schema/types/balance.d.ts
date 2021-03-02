@@ -7,7 +7,7 @@
 
 export interface APIBalance {
     $schema?: 'api:balance';
-    user: {
+    User: {
         [k: string]: unknown;
     };
     balance: number;

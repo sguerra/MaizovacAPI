@@ -7,7 +7,7 @@
             "enum": ["api:balance"],
             "type": "string"
         },
-        "user": {
+        "User": {
             "type": "object"
         },
         "balance": {
@@ -15,5 +15,5 @@
         }
     },
     "additionalProperties": false,
-    "required": ["user", "balance"]
+    "required": ["User", "balance"]
 }

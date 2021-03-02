@@ -8,10 +8,10 @@
 export interface APIRecord {
     $schema?: 'api:record';
     uuid?: string;
-    service: {
+    Service?: {
         [k: string]: unknown;
     };
-    user: {
+    User?: {
         [k: string]: unknown;
     };
     cost?: number;
