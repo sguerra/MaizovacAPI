@@ -7,13 +7,24 @@ module.exports = {
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true
             },
-            type: DataTypes.STRING,
+            type: {
+                type: DataTypes.ENUM,
+                values: [
+                    'addition',
+                    'substraction',
+                    'multiplication',
+                    'division',
+                    'square_root',
+                    'random_string'
+                ]
+            },
             cost: {
                 type: DataTypes.FLOAT,
                 defaultValue: 0.0
             },
             status: {
-                type: DataTypes.STRING,
+                type: DataTypes.ENUM,
+                values: ['active', 'beta', 'inactive'],
                 defaultValue: 'active'
             },
             createdAt: {

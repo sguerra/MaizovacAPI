@@ -22,18 +22,17 @@ const initUser = (sequelize) => {
             },
             username: {
                 type: DataTypes.STRING,
+                allowNull: false,
                 unique: true
             },
             role: {
-                type: DataTypes.STRING,
+                type: DataTypes.ENUM,
+                values: ['user', 'admin'],
                 defaultValue: 'user'
             },
             status: {
-                type: DataTypes.STRING,
-                defaultValue: 'trial'
-            },
-            status: {
-                type: DataTypes.STRING,
+                type: DataTypes.ENUM,
+                values: ['trial', 'active', 'inactive'],
                 defaultValue: 'trial'
             },
             deletedAt: {

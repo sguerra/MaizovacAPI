@@ -12,11 +12,13 @@ module.exports = {
                 unique: true
             },
             role: {
-                type: DataTypes.STRING,
+                type: DataTypes.ENUM,
+                values: ['user', 'admin'],
                 defaultValue: 'user'
             },
             status: {
-                type: DataTypes.STRING,
+                type: DataTypes.ENUM,
+                values: ['trial', 'active', 'inactive'],
                 defaultValue: 'trial'
             },
             createdAt: {

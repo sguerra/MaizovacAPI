@@ -5,7 +5,7 @@ module.exports = {
         await queryInterface.bulkInsert('Users', [
             {
                 uuid: '715c8d19-6861-43f0-a26c-4ff19b3a805c',
-                username: 'root@example.com',
+                username: process.env.DEFAULT_USERNAME,
                 role: 'admin',
                 status: 'active',
                 createdAt: new Date(),
