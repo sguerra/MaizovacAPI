@@ -17,7 +17,6 @@ types:
     api:role: !include ../schema/json/role.json
     api:record: !include ../schema/json/record.json
     api:balance: !include ../schema/json/balance.json
-    api:session: !include ../schema/json/session.json
     
 traits:
     collection:
@@ -64,6 +63,17 @@ traits:
                         body:
                             type: api:service
                     404:
+                        body:
+                            type: api:error
+            patch:
+                description: Update a service
+                body:
+                    type: api:service
+                responses:
+                    200:
+                        body:
+                            type: api:service
+                    400:
                         body:
                             type: api:error
             /calculate:

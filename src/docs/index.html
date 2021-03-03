@@ -734,6 +734,13 @@
                                                         class="badge badge_get"
                                                         >get</span
                                                     ></a
+                                                >
+                                                <a
+                                                    href="#version__services__service__patch"
+                                                    ><span
+                                                        class="badge badge_patch"
+                                                        >patch</span
+                                                    ></a
                                                 ></span
                                             >
                                         </h4>
@@ -759,6 +766,21 @@
                                                             Get an API service
                                                             detail
                                                         </p>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div
+                                                    onclick="window.location.href = '#version__services__service__patch'"
+                                                    class="list-group-item"
+                                                >
+                                                    <span
+                                                        class="badge badge_patch"
+                                                        >patch</span
+                                                    >
+                                                    <div
+                                                        class="method_description"
+                                                    >
+                                                        <p>Update a service</p>
                                                     </div>
                                                     <div class="clearfix"></div>
                                                 </div>
@@ -930,6 +952,265 @@
                                                                     href="http://httpstatus.es/404"
                                                                     target="_blank"
                                                                     >404</a
+                                                                >
+                                                            </h2>
+                                                            <h3>Body</h3>
+                                                            <p>
+                                                                <strong
+                                                                    >Media
+                                                                    type</strong
+                                                                >:
+                                                                application/json
+                                                            </p>
+                                                            <p>
+                                                                <strong
+                                                                    >Type</strong
+                                                                >: json
+                                                            </p>
+                                                            <p>
+                                                                <strong
+                                                                    >Content</strong
+                                                                >:
+                                                            </p>
+                                                            <pre><code>{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "API error",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "enum": ["api:error"],
+            "type": "string"
+        },
+        "message": {
+            "type": "string"
+        }
+    },
+    "additionalProperties": false,
+    "required": ["$schema", "message"]
+}
+</code></pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="modal fade"
+                                        tabindex="0"
+                                        id="version__services__service__patch"
+                                    >
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button
+                                                        type="button"
+                                                        class="close"
+                                                        data-dismiss="modal"
+                                                        aria-hidden="true"
+                                                    >
+                                                        &times;
+                                                    </button>
+                                                    <h4
+                                                        class="modal-title"
+                                                        id="myModalLabel"
+                                                    >
+                                                        <span
+                                                            class="badge badge_patch"
+                                                            >patch</span
+                                                        >
+                                                        <span class="parent"
+                                                            >/{version}/services</span
+                                                        >/{service}
+                                                    </h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div
+                                                        class="alert alert-info"
+                                                    >
+                                                        <p>Update a service</p>
+                                                    </div>
+                                                    <ul class="nav nav-tabs">
+                                                        <li class="active">
+                                                            <a
+                                                                href="#version__services__service__patch_request"
+                                                                data-toggle="tab"
+                                                                >Request</a
+                                                            >
+                                                        </li>
+                                                        <li>
+                                                            <a
+                                                                href="#version__services__service__patch_response"
+                                                                data-toggle="tab"
+                                                                >Response</a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                    <div class="tab-content">
+                                                        <div
+                                                            class="tab-pane active"
+                                                            id="version__services__service__patch_request"
+                                                        >
+                                                            <h3>
+                                                                URI Parameters
+                                                            </h3>
+                                                            <ul>
+                                                                <li>
+                                                                    <strong
+                                                                        >version</strong
+                                                                    >:
+                                                                    <em
+                                                                        ><span
+                                                                            class="required"
+                                                                            >required</span
+                                                                        >(v1)</em
+                                                                    >
+                                                                </li>
+                                                                <li>
+                                                                    <strong
+                                                                        >service</strong
+                                                                    >:
+                                                                    <em
+                                                                        ><span
+                                                                            class="required"
+                                                                            >required</span
+                                                                        >(one of
+                                                                        addition,
+                                                                        substraction,
+                                                                        multiplication,
+                                                                        division,
+                                                                        square_root,
+                                                                        random_string)</em
+                                                                    >
+                                                                </li>
+                                                            </ul>
+                                                            <h3>Body</h3>
+                                                            <p>
+                                                                <strong
+                                                                    >Media
+                                                                    type</strong
+                                                                >:
+                                                                application/json
+                                                            </p>
+                                                            <p>
+                                                                <strong
+                                                                    >Type</strong
+                                                                >: json
+                                                            </p>
+                                                            <p>
+                                                                <strong
+                                                                    >Content</strong
+                                                                >:
+                                                            </p>
+                                                            <pre><code>{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "API service",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "enum": ["api:service"],
+            "type": "string"
+        },
+        "uuid": {
+            "type": "string"
+        },
+        "type": {
+            "type": "string",
+            "enum": [
+                "addition",
+                "subtraction",
+                "multiplication",
+                "division",
+                "square_root",
+                "random_string"
+            ]
+        },
+        "cost": {
+            "type": "number",
+            "minimum": 0
+        },
+        "status": {
+            "type": "string",
+            "enum": ["active", "beta", "inactive"]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["type"]
+}
+</code></pre>
+                                                        </div>
+                                                        <div
+                                                            class="tab-pane"
+                                                            id="version__services__service__patch_response"
+                                                        >
+                                                            <h2>
+                                                                HTTP status code
+                                                                <a
+                                                                    href="http://httpstatus.es/200"
+                                                                    target="_blank"
+                                                                    >200</a
+                                                                >
+                                                            </h2>
+                                                            <h3>Body</h3>
+                                                            <p>
+                                                                <strong
+                                                                    >Media
+                                                                    type</strong
+                                                                >:
+                                                                application/json
+                                                            </p>
+                                                            <p>
+                                                                <strong
+                                                                    >Type</strong
+                                                                >: json
+                                                            </p>
+                                                            <p>
+                                                                <strong
+                                                                    >Content</strong
+                                                                >:
+                                                            </p>
+                                                            <pre><code>{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "API service",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "enum": ["api:service"],
+            "type": "string"
+        },
+        "uuid": {
+            "type": "string"
+        },
+        "type": {
+            "type": "string",
+            "enum": [
+                "addition",
+                "subtraction",
+                "multiplication",
+                "division",
+                "square_root",
+                "random_string"
+            ]
+        },
+        "cost": {
+            "type": "number",
+            "minimum": 0
+        },
+        "status": {
+            "type": "string",
+            "enum": ["active", "beta", "inactive"]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["type"]
+}
+</code></pre>
+                                                            <h2>
+                                                                HTTP status code
+                                                                <a
+                                                                    href="http://httpstatus.es/400"
+                                                                    target="_blank"
+                                                                    >400</a
                                                                 >
                                                             </h2>
                                                             <h3>Body</h3>
