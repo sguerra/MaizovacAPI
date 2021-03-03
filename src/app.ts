@@ -1,11 +1,12 @@
 import express from 'express';
 import cors from 'cors';
 import osprey from 'osprey';
+import jwt from 'express-jwt';
 import { join } from 'path';
 import bodyParser from 'body-parser';
 import * as routes from './routes';
 import { APIError } from './api/schema/types/error';
-import { DatabaseService } from './services';
+import { DatabaseService, AuthenticationService} from './services';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,6 +22,8 @@ const databaseService = DatabaseService.getInstance(DB_CONNECTION_STRING);
 databaseService.init();
 databaseService.sync();
 
+const jwtCheck = jwt(AuthenticationService.getJWTConfig());
+
 osprey
     .loadFile(ramlPath)
     .then((middleware) => {
@@ -34,6 +37,8 @@ osprey
 
             res.status(err.statusCode).json(errorMessage);
         });
+
+        app.use(jwtCheck);
 
         routes.register(app);
     })

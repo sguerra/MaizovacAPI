@@ -1,8 +1,7 @@
 import { IRoute } from 'express';
 import { errorHandler } from '../utils';
-import { APICollection } from '../api/schema/types/collection';
-import { AuthenticationService } from '../services/external';
-import { User, Record } from '../services/database/models';
+import { AuthenticationService } from '../services';
+import { Record } from '../services/database/models';
 
 export const register = (route: IRoute) => {
     route.get(async (req, res) => {
