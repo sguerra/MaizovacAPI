@@ -1,5 +1,5 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes, Sequelize } = require('sequelize');
 import { User } from './user';
 import { Service } from './service';
 
@@ -58,6 +58,32 @@ class Record extends Model {
             response: serviceResponse,
             date: new Date()
         });
+    }
+
+    /**
+     * Get collection of user balances
+     */
+    static async findBalances() {
+        const userBalanceCollection = await Record.findAll({
+            attributes: [
+                'User.uuid',
+                [
+                    Sequelize.fn(
+                        'COALESCE',
+                        Sequelize.fn('SUM', Sequelize.col('cost')),
+                        0
+                    ),
+                    'balance'
+                ]
+            ],
+            include: {
+                model: User,
+                right: true
+            },
+            group: ['User.uuid']
+        });
+
+        return userBalanceCollection;
     }
 
     /**

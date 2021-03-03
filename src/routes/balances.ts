@@ -1,24 +1,16 @@
 import { IRoute } from 'express';
 import { errorHandler } from '../utils';
 import { APICollection } from '../api/schema/types/collection';
-import { User, Record } from '../services/database/models';
-import { Sequelize } from 'sequelize';
+import { Record } from '../services/database/models';
 
 export const register = (route: IRoute) => {
     route.get(async (req, res) => {
         try {
-            const recordsCollection = (await Record.findAll({
-                attributes: [
-                    'userId',
-                    [Sequelize.fn('SUM', Sequelize.col('cost')), 'balance']
-                ],
-                include: User,
-                group: ['Record.userId', 'User.uuid']
-            })) as any;
+            const userBalanceCollection = (await Record.findBalances()) as any;
 
             const responseBody: APICollection = {
                 $schema: 'api:collection',
-                items: recordsCollection
+                items: userBalanceCollection
             };
 
             res.send(responseBody);

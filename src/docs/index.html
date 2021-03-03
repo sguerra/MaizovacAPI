@@ -1258,6 +1258,49 @@
                                                             <h2>
                                                                 HTTP status code
                                                                 <a
+                                                                    href="http://httpstatus.es/400"
+                                                                    target="_blank"
+                                                                    >400</a
+                                                                >
+                                                            </h2>
+                                                            <h3>Body</h3>
+                                                            <p>
+                                                                <strong
+                                                                    >Media
+                                                                    type</strong
+                                                                >:
+                                                                application/json
+                                                            </p>
+                                                            <p>
+                                                                <strong
+                                                                    >Type</strong
+                                                                >: json
+                                                            </p>
+                                                            <p>
+                                                                <strong
+                                                                    >Content</strong
+                                                                >:
+                                                            </p>
+                                                            <pre><code>{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "API error",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "enum": ["api:error"],
+            "type": "string"
+        },
+        "message": {
+            "type": "string"
+        }
+    },
+    "additionalProperties": false,
+    "required": ["$schema", "message"]
+}
+</code></pre>
+                                                            <h2>
+                                                                HTTP status code
+                                                                <a
                                                                     href="http://httpstatus.es/404"
                                                                     target="_blank"
                                                                     >404</a
