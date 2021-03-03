@@ -159,31 +159,3 @@ traits:
             get:
                 description: Get a collection of records for current user
                 is: [ collection ]
-    /session:
-        get:
-            description: Get the current user session
-            responses:
-                200:
-                    body:
-                        type: api:session
-                404:
-                    body:
-                        type: api:error
-        post:
-            description: Sign in a user
-            responses:
-                201:
-                    body:
-                        type: api:success
-                404:
-                    body:
-                        type: api:error
-        delete:
-            description: Sign out a user
-            responses:
-                200:
-                    body:
-                        type: api:success
-                404:
-                    body:
-                        type: api:error

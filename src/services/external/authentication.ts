@@ -26,7 +26,6 @@ const AuthenticationService = {
      * @param {object} req - Request object
      */
     async getCurrentUsername(req) {
-
         let userRequest = req['user'];
 
         const aud = userRequest['aud'];
