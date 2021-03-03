@@ -6,7 +6,7 @@ import { join } from 'path';
 import bodyParser from 'body-parser';
 import * as routes from './routes';
 import { APIError } from './api/schema/types/error';
-import { DatabaseService, AuthenticationService} from './services';
+import { DatabaseService, AuthenticationService } from './services';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -29,18 +29,18 @@ osprey
     .then((middleware) => {
         app.use(middleware);
 
-        app.use((err, req, res, next) => {
-            const errorMessage: APIError = {
-                $schema: 'api:error',
-                message: err.message
-            };
-
-            res.status(err.statusCode).json(errorMessage);
-        });
-
         app.use(jwtCheck);
 
         routes.register(app);
+
+        app.use((err, req, res, next) => {
+            const errorMessage: APIError = {
+                $schema: 'api:error',
+                message: `${err.name} : ${err.message}`
+            };
+
+            res.status(err.statusCode || err.status || 500).json(errorMessage);
+        });
     })
     .catch((e) => {
         console.error('Error loading RAML', e);

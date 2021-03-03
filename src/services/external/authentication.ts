@@ -1,8 +1,7 @@
 import jwks from 'jwks-rsa';
 
 const AuthenticationService = {
-
-    getJWTConfig(){
+    getJWTConfig() {
         const authenticationURI = `https://${process.env.AUTHORIZATION_DOMAIN}`;
 
         return {
@@ -13,7 +12,7 @@ const AuthenticationService = {
                 jwksUri: `${authenticationURI}/.well-known/jwks.json`
             }),
             audience: process.env.AUTHORIZATION_AUDIENCE,
-            issuer: `${authenticationURI}`,
+            issuer: `${authenticationURI}/`,
             algorithms: ['RS256']
         };
     },
