@@ -6,7 +6,9 @@ import { Record } from '../services/database/models';
 export const register = (route: IRoute) => {
     route.get(async (req, res) => {
         try {
-            let currentUsername = AuthenticationService.getCurrentUsername();
+            let currentUsername = await AuthenticationService.getCurrentUsername(
+                req
+            );
 
             const currentBalance = await Record.findCurrentBalance(
                 currentUsername
@@ -28,7 +30,9 @@ export const register = (route: IRoute) => {
 export const registerRecords = (route: IRoute) => {
     route.get(async (req, res) => {
         try {
-            let currentUsername = AuthenticationService.getCurrentUsername();
+            let currentUsername = await AuthenticationService.getCurrentUsername(
+                req
+            );
 
             const currentRecords = await Record.findCurrentRecords(
                 currentUsername

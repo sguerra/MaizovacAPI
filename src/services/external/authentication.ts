@@ -1,6 +1,10 @@
+import axios from 'axios';
 import jwks from 'jwks-rsa';
 
 const AuthenticationService = {
+    /**
+     * Get JWT configuration
+     */
     getJWTConfig() {
         const authenticationURI = `https://${process.env.AUTHORIZATION_DOMAIN}`;
 
@@ -17,8 +21,24 @@ const AuthenticationService = {
         };
     },
 
-    getCurrentUsername() {
-        return process.env.DEFAULT_USERNAME;
+    /**
+     * Get current username from authentication token
+     * @param {object} req - Request object
+     */
+    async getCurrentUsername(req) {
+
+        let userRequest = req['user'];
+
+        const aud = userRequest['aud'];
+        const userInfoURI = aud[1];
+
+        const authResponse = await axios.get<string>(userInfoURI, {
+            headers: {
+                Authorization: req['headers']['authorization']
+            }
+        });
+
+        return authResponse.data['name'];
     }
 };
 

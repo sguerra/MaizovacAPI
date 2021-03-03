@@ -1,7 +1,7 @@
 import { IRoute } from 'express';
 import { errorHandler } from '../utils';
 import { APISuccess } from '../api/schema/types/success';
-import { APICollection, APIService } from '../api/schema/types/collection';
+import { APICollection } from '../api/schema/types/collection';
 import { APIOperationResult } from '../api/schema/types/operationResult';
 import { Service, Record } from '../services/database/models';
 import { OperationService } from '../services/internal';
@@ -94,7 +94,9 @@ export const registerOperation = (route: IRoute) => {
     route.post(async (req, res) => {
         try {
             let serviceResult;
-            let currentUsername = AuthenticationService.getCurrentUsername();
+            let currentUsername = await AuthenticationService.getCurrentUsername(
+                req
+            );
             const serviceType = req.params['service'];
             const parameters = req.body['parameters'];
 
