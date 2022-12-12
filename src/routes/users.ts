@@ -27,7 +27,7 @@ export const register = (route: IRoute) => {
 
     route.post(async (req, res) => {
         try {
-            let user = req.body as User;
+            let user = req.body as any;
 
             user = await User.create(user);
             res.status(201).send(user);

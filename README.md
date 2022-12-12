@@ -73,15 +73,6 @@ $ npm install
 docker-compose -f stack.yml up
 ```
 
-
-**Step 3:** Migrate and Seed database
-
-```bash
-# Run migration and initial seed
-npm run db-migration
-npm run db-seed
-```
-
 ## Screenshots
 - API simple live documentation:
 

@@ -30,7 +30,7 @@ export const register = (route: IRoute) => {
 
     route.post(async (req, res) => {
         try {
-            let service = req.body as Service;
+            let service = req.body as any;
 
             service = await Service.create(service);
             res.status(201).send(service);
