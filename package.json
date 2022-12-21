@@ -17,7 +17,9 @@
     "db-migration-undo": "npx sequelize-cli db:migrate:undo:all",
     "db-seed": "npx sequelize-cli db:seed:all",
     "db-seed-undo": "npx sequelize-cli db:seed:undo:all",
-    "docker-up": "docker-compose -f stack.yml up"
+    "docker-up": "docker-compose -f stack.yml up",
+    "docker-build": "docker-compose -f stack.yml build",
+    "docker-sh": "docker-compose -f stack.yml exec api sh"
   },
   "repository": {
     "type": "git",

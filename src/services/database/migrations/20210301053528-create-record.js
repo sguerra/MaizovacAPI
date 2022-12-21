@@ -16,10 +16,10 @@ module.exports = {
                 foreignKey: true
             },
             cost: {
-                type: DataTypes.FLOAT
+                type: DataTypes.DECIMAL(20, 2)
             },
             balance: {
-                type: DataTypes.FLOAT
+                type: DataTypes.DECIMAL(20, 2)
             },
             response: {
                 type: DataTypes.STRING

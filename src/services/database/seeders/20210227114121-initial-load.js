@@ -17,15 +17,15 @@ module.exports = {
             {
                 uuid: '1cfe5407-77d3-4a91-ab0e-b65335eaa8c9',
                 type: 'addition',
-                cost: 0.15,
+                cost: 1.25,
                 status: 'active',
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
             {
                 uuid: 'b8fdd6f8-3474-4d6b-9eca-4ca69d01ad75',
-                type: 'substraction',
-                cost: 0.15,
+                type: 'subtraction',
+                cost: 1.25,
                 status: 'active',
                 createdAt: new Date(),
                 updatedAt: new Date()
@@ -33,7 +33,7 @@ module.exports = {
             {
                 uuid: 'ae364430-665b-45fc-aec7-5860cc0a6258',
                 type: 'multiplication',
-                cost: 0.25,
+                cost: 2.5,
                 status: 'active',
                 createdAt: new Date(),
                 updatedAt: new Date()
@@ -41,7 +41,7 @@ module.exports = {
             {
                 uuid: '9cede416-4d5f-402b-a721-931d2bdb88a7',
                 type: 'division',
-                cost: 0.25,
+                cost: 2.5,
                 status: 'active',
                 createdAt: new Date(),
                 updatedAt: new Date()
@@ -49,7 +49,7 @@ module.exports = {
             {
                 uuid: '366f4075-9669-4459-b946-8737828b868b',
                 type: 'square_root',
-                cost: 0.25,
+                cost: 4.75,
                 status: 'active',
                 createdAt: new Date(),
                 updatedAt: new Date()
@@ -57,7 +57,7 @@ module.exports = {
             {
                 uuid: '2c299e06-4547-4525-b1a3-be3c1d9e686a',
                 type: 'random_string',
-                cost: 0.35,
+                cost: 5.25,
                 status: 'active',
                 createdAt: new Date(),
                 updatedAt: new Date()

@@ -3,6 +3,8 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 import { User } from './user';
 import { Service } from './service';
 
+const DEFAULT_BALANCE = 10;
+
 class Record extends Model {
     /**
      * Helper method for defining associations.
@@ -43,12 +45,15 @@ class Record extends Model {
         });
 
         if (lastRecord.length == 0) {
-            userBalance = 0;
+            userBalance = DEFAULT_BALANCE;
         } else {
             userBalance = lastRecord[0]['balance'];
         }
 
-        userBalance += service['cost'];
+        userBalance -= service['cost'];
+
+        if (userBalance < 0)
+            throw new Error('Balance is not enough to perform operation');
 
         await Record.create({
             cost: service['cost'],
@@ -104,7 +109,7 @@ class Record extends Model {
             order: [['date', 'DESC']]
         });
 
-        let balance = 0;
+        let balance = DEFAULT_BALANCE;
 
         if (record) {
             balance = record['balance'];
@@ -155,8 +160,8 @@ const initRecord = (sequelize) => {
                 type: DataTypes.UUID,
                 foreignKey: true
             },
-            cost: DataTypes.FLOAT,
-            balance: DataTypes.FLOAT,
+            cost: DataTypes.DECIMAL(20, 2),
+            balance: DataTypes.DECIMAL(20, 2),
             response: DataTypes.STRING,
             date: DataTypes.DATE
         },

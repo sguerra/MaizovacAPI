@@ -6,9 +6,9 @@ services:
         build: .
         image: maizovac-api
         environment: 
-            PORT: $PORT_PROD
+            PORT: $PORT
             DEFAULT_USERNAME: $DEFAULT_USERNAME
-            DB_CONNECTION_STRING: $DB_CONNECTION_STRING_PROD
+            DB_CONNECTION_STRING: $DB_CONNECTION_STRING
             AUTHORIZATION_DOMAIN: $AUTHORIZATION_DOMAIN
             AUTHORIZATION_AUDIENCE: $AUTHORIZATION_AUDIENCE
         ports:
@@ -24,9 +24,9 @@ services:
         ports:
         - 5432:5432
         environment:
-            POSTGRES_USER: $DATABASE_USER_PROD
-            POSTGRES_PASSWORD: $DATABASE_PASSWORD_PROD
-            POSTGRES_DB: $DATABASE_NAME_PROD
+            POSTGRES_USER: $DATABASE_USER
+            POSTGRES_PASSWORD: $DATABASE_PASSWORD
+            POSTGRES_DB: $DATABASE_NAME
         networks:
             - db
 

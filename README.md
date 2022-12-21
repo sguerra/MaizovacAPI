@@ -10,7 +10,7 @@ Build a bare bones calculator with the 4 basic operations and some extras with a
 - Authentication and role management with Auth0 and JWT
 - Services:
     - addition
-    - substraction
+    - subtraction
     - multipication
     - division
     - square root
@@ -45,16 +45,16 @@ Build a bare bones calculator with the 4 basic operations and some extras with a
 
 ```bash
 # Database env variables
-export DATABASE_HOST_PROD=db
-export DATABASE_NAME_PROD=postgres
-export DATABASE_USER_PROD=postgres
-export DATABASE_PASSWORD_PROD=example
+export DATABASE_HOST=db
+export DATABASE_NAME=postgres
+export DATABASE_USER=postgres
+export DATABASE_PASSWORD=example
  
 # API env variables
-export PORT_PROD=3000
-export AUTHORIZATION_DOMAIN=maizovac.us.auth0.com 
+export PORT=3000
+export AUTHORIZATION_DOMAIN=maizovac.us.auth0.com
 export AUTHORIZATION_AUDIENCE=maizovac-api
-export DB_CONNECTION_STRING_PROD=postgres://${DATABASE_USER_PROD}:${DATABASE_PASSWORD_PROD}@${DATABASE_HOST_PROD}:5432/${DATABASE_NAME_PROD}
+export DB_CONNECTION_STRING=postgres://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_HOST}:5432/${DATABASE_NAME}
 
 # Schema migration env vars (seed)
 export DEFAULT_USERNAME=root@example.com
@@ -71,6 +71,19 @@ $ npm install
 
 # (Re)creates, starts, and attaches to containers for a service (see stack.yml for more details)
 docker-compose -f stack.yml up
+```
+
+
+**Step 3:** Migrate and Seed database
+
+```bash
+# Run migration and initial seed
+docker-compose -f stack.yml exec api sh 
+
+# Inside docker shell
+source .env
+npm run db-migration --production
+npm run db-seed --production
 ```
 
 ## Screenshots

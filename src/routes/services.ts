@@ -94,9 +94,8 @@ export const registerOperation = (route: IRoute) => {
     route.post(async (req, res) => {
         try {
             let serviceResult;
-            let currentUsername = await AuthenticationService.getCurrentUsername(
-                req
-            );
+            let currentUsername =
+                await AuthenticationService.getCurrentUsername(req);
             const serviceType = req.params['service'];
             const parameters = req.body['parameters'];
 
@@ -108,8 +107,8 @@ export const registerOperation = (route: IRoute) => {
                 case 'addition':
                     serviceResult = OperationService.addition(parameters);
                     break;
-                case 'substraction':
-                    serviceResult = OperationService.substraction(parameters);
+                case 'subtraction':
+                    serviceResult = OperationService.subtraction(parameters);
                     break;
                 case 'multiplication':
                     serviceResult = OperationService.multiplication(parameters);
@@ -144,7 +143,7 @@ export const registerOperation = (route: IRoute) => {
 
             res.status(200).send(responseBody);
         } catch (err) {
-            errorHandler(err, res);
+            errorHandler(err, res, 400);
         }
     });
 };

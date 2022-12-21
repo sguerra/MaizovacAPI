@@ -24,7 +24,7 @@ const initService = (sequelize) => {
                 type: DataTypes.ENUM,
                 values: [
                     'addition',
-                    'substraction',
+                    'subtraction',
                     'multiplication',
                     'division',
                     'square_root',
@@ -32,7 +32,7 @@ const initService = (sequelize) => {
                 ]
             },
             cost: {
-                type: DataTypes.FLOAT,
+                type: DataTypes.DECIMAL(20, 2),
                 defaultValue: 0.0
             },
             status: {

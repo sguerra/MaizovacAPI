@@ -19,7 +19,7 @@ module.exports = {
                 ]
             },
             cost: {
-                type: DataTypes.FLOAT,
+                type: DataTypes.DECIMAL(20, 2),
                 defaultValue: 0.0
             },
             status: {

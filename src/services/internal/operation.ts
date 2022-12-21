@@ -7,7 +7,7 @@ const OperationService = {
     addition({ firstOperand, secondOperand }: BinaryOperation): number {
         return Number(firstOperand) + Number(secondOperand);
     },
-    substraction({ firstOperand, secondOperand }: BinaryOperation): number {
+    subtraction({ firstOperand, secondOperand }: BinaryOperation): number {
         return Number(firstOperand) - Number(secondOperand);
     },
     multiplication({ firstOperand, secondOperand }: BinaryOperation): number {
