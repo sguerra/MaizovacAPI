@@ -19,6 +19,7 @@ export const register = (app: Application) => {
         app.route('/:version/services/:service/calculate')
     );
     Records.register(app.route('/:version/records'));
+    Records.registerDetail(app.route('/:version/records/:record'));
     Balances.register(app.route('/:version/balances'));
     Profile.register(app.route('/:version/profile'));
     Profile.registerRecords(app.route('/:version/profile/records'));

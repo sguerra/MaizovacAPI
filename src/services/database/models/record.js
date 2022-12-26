@@ -36,20 +36,13 @@ class Record extends Model {
             }
         });
 
-        const lastRecord = await Record.findAll({
-            limit: 1,
+        const balanceSum = await Record.sum('cost', {
             where: {
                 userId: user['uuid']
-            },
-            order: [['date', 'DESC']]
+            }
         });
 
-        if (lastRecord.length == 0) {
-            userBalance = DEFAULT_BALANCE;
-        } else {
-            userBalance = lastRecord[0]['balance'];
-        }
-
+        userBalance = DEFAULT_BALANCE - balanceSum;
         userBalance -= service['cost'];
 
         if (userBalance < 0)
@@ -102,18 +95,13 @@ class Record extends Model {
             }
         });
 
-        const record = await Record.findOne({
+        const balanceSum = await Record.sum('cost', {
             where: {
                 userId: user['uuid']
-            },
-            order: [['date', 'DESC']]
+            }
         });
 
-        let balance = DEFAULT_BALANCE;
-
-        if (record) {
-            balance = record['balance'];
-        }
+        let balance = DEFAULT_BALANCE - balanceSum;
 
         return {
             User: user,

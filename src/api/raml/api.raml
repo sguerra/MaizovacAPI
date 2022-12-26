@@ -150,6 +150,19 @@ traits:
         get:
             description: Get a collection of records
             is: [ collection ]
+        /{record}:
+            uriParameters:
+                record:
+                    type: "string"
+            delete:
+                description: Soft-delete a record
+                responses:
+                    201:
+                        body:
+                            type: api:success
+                    404:
+                        body:
+                            type: api:error
     /balances:
         get:
             description: Get a collection of user balances
