@@ -1,27 +1,26 @@
 # MaizoVAC API
 
-## The idea
+Service calculator server with the 6 basic operations provided in a [REST API].
 
-Build a bare bones calculator with the 4 basic operations and some extras with all the logic residing in a [REST API].
+<img src="./src/docs/screenshot-first-screen.png" width="700" alt="Maizovac UI first screen"/>
 
 ## Features
 
-- User CRUD
-- Authentication and role management with Auth0 and JWT
+- Authentication with Auth0 and JWT
 - Services:
     - addition
     - subtraction
     - multipication
     - division
     - square root
+    - random string (external provider)
 - Keep track of all the service executions made by the user
 - Allow changing the status of the services
 - Displays a table with all the transactions made by the users
 
 ### Assumptions
-- Balance/Credit starts in 0 and increments as the User requests a service
-- Records are not editable for the sake of integrity of the data history
-- Balance/Credit is not editable for the sake of records history 
+- Balance/Credit starts in $10 and decreases as the User requests for a service
+- Records can be deleted so that the user balance can be restored
 - Services are not removable, they can only be edited and disabled
 
 ## Stack
@@ -37,6 +36,8 @@ Build a bare bones calculator with the 4 basic operations and some extras with a
     A promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication and more.
 - [PostgreSQL](https://www.postgresql.org/)
     A powerful, open source object-relational database system with over 30 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance. 
+- [Jest](https://jestjs.io/)
+    A delightful JavaScript Testing Framework with a focus on simplicity.
 
 
 ## Build Setup
@@ -77,14 +78,25 @@ docker-compose -f stack.yml up
 **Step 3:** Migrate and Seed database
 
 ```bash
-# Run migration and initial seed
+# Open shell inside docker container
 docker-compose -f stack.yml exec api sh 
 
-# Inside docker shell
+# Run migration and initial seed
 source .env
 npm run db-migration --production
 npm run db-seed --production
 ```
+
+## Testing
+
+- Main endpoints are tested with Jest via:
+
+```bash
+npm run test
+```
+
+<img src="./src/docs/screenshot-testing.png" width="700" alt="Maizovac API testing"/>
+
 
 ## Screenshots
 - API simple live documentation:
@@ -94,7 +106,3 @@ npm run db-seed --production
 - Expected request/response body:
 
 <img src="./src/docs/screenshot-detail.png" width="700" alt="Maizovac API request"/>
-
-- Simple testing with [Postman](https://www.postman.com/) (Optional):
-
-<img src="./src/docs/screenshot-testing.png" width="700" alt="Maizovac API testing"/>
