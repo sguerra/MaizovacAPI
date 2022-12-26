@@ -1,0 +1,13 @@
+{
+    "$schema": "api:balance",
+    "User": {
+        "uuid": "715c8d19-6861-43f0-a26c-4ff19b3a805c",
+        "username": "root@example.com",
+        "role": "admin",
+        "status": "active",
+        "deletedAt": null,
+        "createdAt": "2022-12-21T07:52:32.625Z",
+        "updatedAt": "2022-12-21T07:52:32.625Z"
+    },
+    "balance": 1.25
+}

@@ -1,0 +1,92 @@
+[
+    {
+        "uuid": "5b0e7b3b-c8f7-4168-af69-f33faba14462",
+        "serviceId": "9cede416-4d5f-402b-a721-931d2bdb88a7",
+        "userId": "715c8d19-6861-43f0-a26c-4ff19b3a805c",
+        "cost": "2.50",
+        "balance": "1.25",
+        "response": "16",
+        "date": "2022-12-26T14:40:11.090Z",
+        "createdAt": "2022-12-26T14:40:11.091Z",
+        "updatedAt": "2022-12-26T14:40:11.091Z",
+        "deletedAt": null,
+        "User": {
+            "uuid": "715c8d19-6861-43f0-a26c-4ff19b3a805c",
+            "username": "root@example.com",
+            "role": "admin",
+            "status": "active",
+            "deletedAt": null,
+            "createdAt": "2022-12-21T07:52:32.625Z",
+            "updatedAt": "2022-12-21T07:52:32.625Z"
+        },
+        "Service": {
+            "uuid": "9cede416-4d5f-402b-a721-931d2bdb88a7",
+            "type": "division",
+            "cost": "2.50",
+            "status": "active",
+            "createdAt": "2022-12-21T07:52:32.630Z",
+            "updatedAt": "2022-12-21T07:52:32.630Z",
+            "deletedAt": null
+        }
+    },
+    {
+        "uuid": "62e53ca1-29f9-41ce-ba45-6aeb4c6d5674",
+        "serviceId": "2c299e06-4547-4525-b1a3-be3c1d9e686a",
+        "userId": "715c8d19-6861-43f0-a26c-4ff19b3a805c",
+        "cost": "5.25",
+        "balance": "1.25",
+        "response": "k2rVC",
+        "date": "2022-12-26T14:39:35.919Z",
+        "createdAt": "2022-12-26T14:39:35.923Z",
+        "updatedAt": "2022-12-26T14:39:35.923Z",
+        "deletedAt": null,
+        "User": {
+            "uuid": "715c8d19-6861-43f0-a26c-4ff19b3a805c",
+            "username": "root@example.com",
+            "role": "admin",
+            "status": "active",
+            "deletedAt": null,
+            "createdAt": "2022-12-21T07:52:32.625Z",
+            "updatedAt": "2022-12-21T07:52:32.625Z"
+        },
+        "Service": {
+            "uuid": "2c299e06-4547-4525-b1a3-be3c1d9e686a",
+            "type": "random_string",
+            "cost": "5.25",
+            "status": "active",
+            "createdAt": "2022-12-21T07:52:32.630Z",
+            "updatedAt": "2022-12-21T07:52:32.630Z",
+            "deletedAt": null
+        }
+    },
+    {
+        "uuid": "cd3c8c19-c591-4191-8ee8-13640e837614",
+        "serviceId": "1cfe5407-77d3-4a91-ab0e-b65335eaa8c9",
+        "userId": "715c8d19-6861-43f0-a26c-4ff19b3a805c",
+        "cost": "1.00",
+        "balance": "4.25",
+        "response": "36",
+        "date": "2022-12-26T04:32:01.685Z",
+        "createdAt": "2022-12-26T04:32:01.686Z",
+        "updatedAt": "2022-12-26T04:32:01.686Z",
+        "deletedAt": null,
+        "User": {
+            "uuid": "715c8d19-6861-43f0-a26c-4ff19b3a805c",
+            "username": "root@example.com",
+            "role": "admin",
+            "status": "active",
+            "deletedAt": null,
+            "createdAt": "2022-12-21T07:52:32.625Z",
+            "updatedAt": "2022-12-21T07:52:32.625Z"
+        },
+        "Service": {
+            "uuid": "1cfe5407-77d3-4a91-ab0e-b65335eaa8c9",
+            "type": "addition",
+            "cost": "1.00",
+            "status": "active",
+            "createdAt": "2022-12-21T07:52:32.630Z",
+            "updatedAt": "2022-12-26T04:03:00.366Z",
+            "deletedAt": null
+        }
+    }
+]

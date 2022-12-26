@@ -5,7 +5,8 @@ import { APICollection } from '../api/schema/types/collection';
 import { APIOperationResult } from '../api/schema/types/operationResult';
 import { Service, Record } from '../services/database/models';
 import { OperationService } from '../services/internal';
-import { AuthenticationService, RandomService } from '../services/external';
+import { AuthenticationService } from '../services';
+import { RandomService } from '../services/external';
 
 const successMessage: APISuccess = {
     $schema: 'api:success',
